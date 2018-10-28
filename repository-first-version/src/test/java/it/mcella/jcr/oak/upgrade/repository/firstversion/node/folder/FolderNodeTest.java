@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 public class FolderNodeTest {
@@ -61,7 +62,7 @@ public class FolderNodeTest {
     public void shouldBeEqualIfAllFieldsAreEqual() throws Exception {
         FolderNode anotherFolderNode = new FolderNode(jcrNodeId, jcrNodePath, NAME, HIDDEN, childNodeIds);
 
-        assertThat(folderNode, is(anotherFolderNode));
+        assertTrue(folderNode.equals(anotherFolderNode));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class FolderNodeTest {
         JcrNodeId anotherJcrNodeId = mock(JcrNodeId.class);
         FolderNode anotherFolderNode = new FolderNode(anotherJcrNodeId, jcrNodePath, NAME, HIDDEN, childNodeIds);
 
-        assertThat(folderNode, is(not(anotherFolderNode)));
+        assertFalse(folderNode.equals(anotherFolderNode));
     }
 
     @Test
@@ -77,7 +78,7 @@ public class FolderNodeTest {
         JcrNodePath anotherJcrNodePath = mock(JcrNodePath.class);
         FolderNode anotherFolderNode = new FolderNode(jcrNodeId, anotherJcrNodePath, NAME, HIDDEN, childNodeIds);
 
-        assertThat(folderNode, is(not(anotherFolderNode)));
+        assertFalse(folderNode.equals(anotherFolderNode));
     }
 
     @Test
@@ -85,7 +86,7 @@ public class FolderNodeTest {
         String anotherName = "another file name";
         FolderNode anotherFolderNode = new FolderNode(jcrNodeId, jcrNodePath, anotherName, HIDDEN, childNodeIds);
 
-        assertThat(folderNode, is(not(anotherFolderNode)));
+        assertFalse(folderNode.equals(anotherFolderNode));
     }
 
     @Test
@@ -93,7 +94,7 @@ public class FolderNodeTest {
         boolean anotherHidden = false;
         FolderNode anotherFolderNode = new FolderNode(jcrNodeId, jcrNodePath, NAME, anotherHidden, childNodeIds);
 
-        assertThat(folderNode, is(not(anotherFolderNode)));
+        assertFalse(folderNode.equals(anotherFolderNode));
     }
 
     @Test
@@ -103,7 +104,7 @@ public class FolderNodeTest {
         otherChildNodeIds.add(anotherChildNodeId);
         FolderNode anotherFolderNode = new FolderNode(jcrNodeId, jcrNodePath, NAME, HIDDEN, otherChildNodeIds);
 
-        assertThat(folderNode, is(not(anotherFolderNode)));
+        assertFalse(folderNode.equals(anotherFolderNode));
     }
 
 }

@@ -10,7 +10,9 @@ import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 public class RootNodeTest {
@@ -55,7 +57,7 @@ public class RootNodeTest {
     public void shouldBeEqualIfAllFieldsAreEqual() throws Exception {
         RootNode anotherRootNode = new RootNode(jcrNodeId, jcrNodePath, NAME, childNodeIds);
 
-        assertThat(rootNode, is(anotherRootNode));
+        assertTrue(rootNode.equals(anotherRootNode));
     }
 
     @Test
@@ -63,7 +65,7 @@ public class RootNodeTest {
         JcrNodeId anotherJcrNodeId = mock(JcrNodeId.class);
         RootNode anotherRootNode = new RootNode(anotherJcrNodeId, jcrNodePath, NAME, childNodeIds);
 
-        assertThat(rootNode, is(not(anotherRootNode)));
+        assertFalse(rootNode.equals(anotherRootNode));
     }
 
     @Test
@@ -71,7 +73,7 @@ public class RootNodeTest {
         JcrNodePath anotherJcrNodePath = mock(JcrNodePath.class);
         RootNode anotherRootNode = new RootNode(jcrNodeId, anotherJcrNodePath, NAME, childNodeIds);
 
-        assertThat(rootNode, is(not(anotherRootNode)));
+        assertFalse(rootNode.equals(anotherRootNode));
     }
 
     @Test
@@ -79,7 +81,7 @@ public class RootNodeTest {
         String anotherName = "another file name";
         RootNode anotherRootNode = new RootNode(jcrNodeId, jcrNodePath, anotherName, childNodeIds);
 
-        assertThat(rootNode, is(not(anotherRootNode)));
+        assertFalse(rootNode.equals(anotherRootNode));
     }
 
     @Test
@@ -89,7 +91,7 @@ public class RootNodeTest {
         otherChildNodeIds.add(anotherChildNodeId);
         RootNode anotherRootNode = new RootNode(jcrNodeId, jcrNodePath, NAME, otherChildNodeIds);
 
-        assertThat(rootNode, is(not(anotherRootNode)));
+        assertFalse(rootNode.equals(anotherRootNode));
     }
 
 }

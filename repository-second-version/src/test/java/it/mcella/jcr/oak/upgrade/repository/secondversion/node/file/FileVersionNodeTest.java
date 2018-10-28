@@ -7,7 +7,9 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 public class FileVersionNodeTest {
@@ -76,7 +78,7 @@ public class FileVersionNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, SYSTEM, DESCRIPTION, MIME_TYPE);
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, SYSTEM, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(anotherFileVersionNode));
+        assertTrue(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -85,7 +87,7 @@ public class FileVersionNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, SYSTEM, DESCRIPTION, MIME_TYPE);
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, anotherJcrNodeId, SYSTEM, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -94,7 +96,7 @@ public class FileVersionNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, anotherJcrNodePath, NAME, SYSTEM, DESCRIPTION, MIME_TYPE);
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, SYSTEM, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -103,7 +105,7 @@ public class FileVersionNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, anotherName, SYSTEM, DESCRIPTION, MIME_TYPE);
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, SYSTEM, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -112,7 +114,7 @@ public class FileVersionNodeTest {
         boolean anotherSystem = true;
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, anotherSystem, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -121,7 +123,7 @@ public class FileVersionNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, SYSTEM, anotherDescription, MIME_TYPE);
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, SYSTEM, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -130,7 +132,7 @@ public class FileVersionNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, SYSTEM, DESCRIPTION, anotherMimeType);
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, SYSTEM, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -139,7 +141,7 @@ public class FileVersionNodeTest {
         long anotherVersionNumber = 2L;
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, SYSTEM, anotherVersionNumber, VERSION_DESCRIPTION);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
     @Test
@@ -148,7 +150,7 @@ public class FileVersionNodeTest {
         String anotherVersionDescription = "another version description";
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, SYSTEM, VERSION_NUMBER, anotherVersionDescription);
 
-        assertThat(fileVersionNode, is(not(anotherFileVersionNode)));
+        assertFalse(fileVersionNode.equals(anotherFileVersionNode));
     }
 
 }

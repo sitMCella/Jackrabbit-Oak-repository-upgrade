@@ -4,8 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class OakNodePathTest {
 
@@ -36,14 +37,14 @@ public class OakNodePathTest {
     public void shouldBeEqualIfNodePathIsEqual() throws Exception {
         OakNodePath anotherOakNodePath = new OakNodePath(NODE_PATH);
 
-        assertThat(oakNodePath, is(anotherOakNodePath));
+        assertTrue(oakNodePath.equals(anotherOakNodePath));
     }
 
     @Test
     public void shouldBeEqualIfNodePathIsDifferent() throws Exception {
         OakNodePath anotherOakNodePath = new OakNodePath("/another/path/to/node");
 
-        assertThat(oakNodePath, is(not(anotherOakNodePath)));
+        assertFalse(oakNodePath.equals(anotherOakNodePath));
     }
 
 }

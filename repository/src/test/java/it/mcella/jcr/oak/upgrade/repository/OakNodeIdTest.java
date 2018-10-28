@@ -4,8 +4,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class OakNodeIdTest {
 
@@ -27,14 +28,14 @@ public class OakNodeIdTest {
     public void shouldBeEqualIfNodeIdIsEqual() throws Exception {
         OakNodeId anotherOakNodeId = new OakNodeId(NODE_ID);
 
-        assertThat(oakNodeId, is(anotherOakNodeId));
+        assertTrue(oakNodeId.equals(anotherOakNodeId));
     }
 
     @Test
     public void shouldNotBeEqualIfNodeIdIsDifferent() throws Exception {
         OakNodeId anotherOakNodeId = new OakNodeId("another node id");
 
-        assertThat(oakNodeId, is(not(anotherOakNodeId)));
+        assertFalse(oakNodeId.equals(anotherOakNodeId));
     }
 
 }

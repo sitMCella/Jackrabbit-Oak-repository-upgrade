@@ -6,8 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 public class FileNodeTest {
@@ -61,7 +62,7 @@ public class FileNodeTest {
     public void shouldBeEqualIfAllFieldsAreEqual() throws Exception {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, HIDDEN, DELETABLE, MIME_TYPE);
 
-        assertThat(fileNode, is(anotherFileNode));
+        assertTrue(fileNode.equals(anotherFileNode));
     }
 
     @Test
@@ -69,7 +70,7 @@ public class FileNodeTest {
         JcrNodeId anotherJcrNodeId = mock(JcrNodeId.class);
         FileNode anotherFileNode = new FileNode(anotherJcrNodeId, jcrNodePath, NAME, HIDDEN, DELETABLE, MIME_TYPE);
 
-        assertThat(fileNode, is(not(anotherFileNode)));
+        assertFalse(fileNode.equals(anotherFileNode));
     }
 
     @Test
@@ -77,7 +78,7 @@ public class FileNodeTest {
         JcrNodePath anotherJcrNodePath = mock(JcrNodePath.class);
         FileNode anotherFileNode = new FileNode(jcrNodeId, anotherJcrNodePath, NAME, HIDDEN, DELETABLE, MIME_TYPE);
 
-        assertThat(fileNode, is(not(anotherFileNode)));
+        assertFalse(fileNode.equals(anotherFileNode));
     }
 
     @Test
@@ -85,7 +86,7 @@ public class FileNodeTest {
         String anotherName = "another file name";
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, anotherName, HIDDEN, DELETABLE, MIME_TYPE);
 
-        assertThat(fileNode, is(not(anotherFileNode)));
+        assertFalse(fileNode.equals(anotherFileNode));
     }
 
     @Test
@@ -93,7 +94,7 @@ public class FileNodeTest {
         boolean anotherHidden = true;
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, anotherHidden, DELETABLE, MIME_TYPE);
 
-        assertThat(fileNode, is(not(anotherFileNode)));
+        assertFalse(fileNode.equals(anotherFileNode));
     }
 
     @Test
@@ -101,7 +102,7 @@ public class FileNodeTest {
         boolean anotherDeletable = false;
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, HIDDEN, anotherDeletable, MIME_TYPE);
 
-        assertThat(fileNode, is(not(anotherFileNode)));
+        assertFalse(fileNode.equals(anotherFileNode));
     }
 
     @Test
@@ -109,7 +110,7 @@ public class FileNodeTest {
         String anotherMimeType = "another mime type";
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, HIDDEN, DELETABLE, anotherMimeType);
 
-        assertThat(fileNode, is(not(anotherFileNode)));
+        assertFalse(fileNode.equals(anotherFileNode));
     }
 
 }
