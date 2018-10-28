@@ -10,6 +10,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class FileVersionNodeTest {
 
@@ -77,7 +78,8 @@ public class FileVersionNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, HIDDEN, DELETABLE, MIME_TYPE);
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, VERSION_NUMBER, VERSION_DESCRIPTION);
 
-        assertTrue(fileVersionNode.equals(anotherFileVersionNode));
+        assertTrue(fileVersionNode.equals(anotherFileVersionNode) && anotherFileVersionNode.equals(fileVersionNode));
+        assertThat(fileVersionNode.hashCode(), is(anotherFileVersionNode.hashCode()));
     }
 
     @Test
@@ -150,6 +152,18 @@ public class FileVersionNodeTest {
         FileVersionNode anotherFileVersionNode = new FileVersionNode(anotherFileNode, jcrNodeVersionId, VERSION_NUMBER, anotherVersionDescription);
 
         assertFalse(fileVersionNode.equals(anotherFileVersionNode));
+    }
+
+    @Test
+    public void shouldGetStringRepresentation() throws Exception {
+        String nodeId = "node id";
+        when(jcrNodeVersionId.getNodeId()).thenReturn(nodeId);
+        String path = "/path/to/node";
+        when(jcrNodePath.getPath()).thenReturn(path);
+        String expected = String.format("FileVersionNode{jcrNodeId='%s', jcrNodePath='%s', name='%s', hidden=%s, deletable=%s, mimeType='%s', versionNumber=%s, versionDescription='%s'}",
+                nodeId, path, NAME, HIDDEN, DELETABLE, MIME_TYPE, VERSION_NUMBER, VERSION_DESCRIPTION);
+
+        assertThat(fileVersionNode.toString(), is(expected));
     }
 
 }

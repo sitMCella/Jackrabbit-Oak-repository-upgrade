@@ -196,7 +196,8 @@ public class JcrNamespaceTest {
     public void shouldBeEqualsToAnotherNamespaceIfPrefixAndUriAreEquals() throws Exception {
         JcrNamespace anotherJcrNamespace = new JcrNamespace(PREFIX, URI);
 
-        assertTrue(jcrNamespace.equals(anotherJcrNamespace));
+        assertTrue(jcrNamespace.equals(anotherJcrNamespace) && anotherJcrNamespace.equals(jcrNamespace));
+        assertThat(jcrNamespace.hashCode(), is(anotherJcrNamespace.hashCode()));
     }
 
     @Test
@@ -211,6 +212,21 @@ public class JcrNamespaceTest {
         JcrNamespace anotherJcrNamespace = new JcrNamespace(PREFIX, "anotherUri");
 
         assertFalse(jcrNamespace.equals(anotherJcrNamespace));
+    }
+
+    @Test
+    public void shouldBeEqualsToAnotherNamespaceIfPrefixesAreNull() throws Exception {
+        JcrNamespace nullJcrNamespace = new JcrNamespace(null, URI);
+        JcrNamespace anotherNullJcrNamespace = new JcrNamespace(null, URI);
+
+        assertTrue(nullJcrNamespace.equals(anotherNullJcrNamespace) && anotherNullJcrNamespace.equals(nullJcrNamespace));
+    }
+
+    @Test
+    public void shouldGetStringRepresentation() throws Exception {
+        String expected = String.format("JcrNamespace{prefix='%s', uri='%s'}", PREFIX, URI);
+
+        assertThat(jcrNamespace.toString(), is(expected));
     }
 
 }

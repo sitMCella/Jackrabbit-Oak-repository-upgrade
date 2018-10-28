@@ -634,4 +634,49 @@ public class OakNodeTest {
         verify(node).getIndex();
     }
 
+    @Test
+    public void shouldBeEqualIfIdentifierIsEqual() throws Exception {
+        OakNode anotherOakNode = new OakNode(node);
+
+        assertTrue(oakNode.equals(anotherOakNode) && anotherOakNode.equals(oakNode));
+        assertThat(oakNode.hashCode(), is(anotherOakNode.hashCode()));
+    }
+
+    @Test
+    public void shouldBeEqualIfNodesAreNull() throws Exception {
+        OakNode nullOakNode = new OakNode(null);
+        OakNode anotherNullOakNode = new OakNode(null);
+
+        assertTrue(nullOakNode.equals(anotherNullOakNode) && anotherNullOakNode.equals(nullOakNode));
+    }
+
+    @Test
+    public void shouldNotBeEqualIfIdentifierIsDifferent() throws Exception {
+        Node anotherNode = mock(Node.class);
+        when(anotherNode.getIdentifier()).thenReturn("another identifier");
+        OakNode anotherOakNode = new OakNode(anotherNode);
+
+        assertFalse(oakNode.equals(anotherOakNode));
+    }
+
+    @Test
+    public void shouldNotBeEqualOnRepositoryException() throws Exception {
+        Node anotherNode = mock(Node.class);
+        when(anotherNode.getIdentifier()).thenThrow(new RepositoryException());
+        OakNode anotherOakNode = new OakNode(anotherNode);
+
+        assertFalse(oakNode.equals(anotherOakNode));
+    }
+
+    @Test
+    public void shouldGetStringRepresentation() throws Exception {
+        String name = "name";
+        when(node.getName()).thenReturn(name);
+        String path = "path";
+        when(node.getPath()).thenReturn(path);
+        String expected = String.format("OakNode{name=%s, path=OakNodePath{path='%s'}}", name, path);
+
+        assertThat(oakNode.toString(), is(expected));
+    }
+
 }

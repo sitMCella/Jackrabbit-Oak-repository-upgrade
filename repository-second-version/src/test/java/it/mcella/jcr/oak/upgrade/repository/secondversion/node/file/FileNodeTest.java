@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class FileNodeTest {
 
@@ -63,7 +63,8 @@ public class FileNodeTest {
     public void shouldBeEqualIfAllFieldsAreEqual() throws Exception {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, SYSTEM, DESCRIPTION, MIME_TYPE);
 
-        assertTrue(fileNode.equals(anotherFileNode));
+        assertTrue(fileNode.equals(anotherFileNode) && anotherFileNode.equals(fileNode));
+        assertThat(fileNode.hashCode(), is(anotherFileNode.hashCode()));
     }
 
     @Test
@@ -112,6 +113,18 @@ public class FileNodeTest {
         FileNode anotherFileNode = new FileNode(jcrNodeId, jcrNodePath, NAME, SYSTEM, DESCRIPTION, anotherMimeType);
 
         assertFalse(fileNode.equals(anotherFileNode));
+    }
+
+    @Test
+    public void shouldGetStringRepresentation() throws Exception {
+        String nodeId = "node id";
+        when(jcrNodeId.getNodeId()).thenReturn(nodeId);
+        String path = "/path/to/node";
+        when(jcrNodePath.getPath()).thenReturn(path);
+        String expected = String.format("FileNode{jcrNodeId='%s', jcrNodePath='%s', name='%s', system=%s, description='%s', mimeType='%s'}",
+                nodeId, path, NAME, SYSTEM, DESCRIPTION, MIME_TYPE);
+
+        assertThat(fileNode.toString(), is(expected));
     }
 
 }

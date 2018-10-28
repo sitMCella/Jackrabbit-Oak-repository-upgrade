@@ -28,7 +28,16 @@ public class OakNodeIdTest {
     public void shouldBeEqualIfNodeIdIsEqual() throws Exception {
         OakNodeId anotherOakNodeId = new OakNodeId(NODE_ID);
 
-        assertTrue(oakNodeId.equals(anotherOakNodeId));
+        assertTrue(oakNodeId.equals(anotherOakNodeId) && anotherOakNodeId.equals(oakNodeId));
+        assertThat(oakNodeId.hashCode(), is(anotherOakNodeId.hashCode()));
+    }
+
+    @Test
+    public void shouldBeEqualIfNodeIdsAreNull() throws Exception {
+        OakNodeId nullOakNodeId = new OakNodeId(null);
+        OakNodeId anotherNullOakNodeId = new OakNodeId(null);
+
+        assertTrue(nullOakNodeId.equals(anotherNullOakNodeId) && anotherNullOakNodeId.equals(nullOakNodeId));
     }
 
     @Test
@@ -36,6 +45,13 @@ public class OakNodeIdTest {
         OakNodeId anotherOakNodeId = new OakNodeId("another node id");
 
         assertFalse(oakNodeId.equals(anotherOakNodeId));
+    }
+
+    @Test
+    public void shouldGetStringRepresentation() throws Exception {
+        String expected = String.format("OakNodeId{nodeId='%s'}", NODE_ID);
+
+        assertThat(oakNodeId.toString(), is(expected));
     }
 
 }

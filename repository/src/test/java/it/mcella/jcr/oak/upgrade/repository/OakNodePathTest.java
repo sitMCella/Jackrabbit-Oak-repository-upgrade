@@ -37,7 +37,8 @@ public class OakNodePathTest {
     public void shouldBeEqualIfNodePathIsEqual() throws Exception {
         OakNodePath anotherOakNodePath = new OakNodePath(NODE_PATH);
 
-        assertTrue(oakNodePath.equals(anotherOakNodePath));
+        assertTrue(oakNodePath.equals(anotherOakNodePath) && anotherOakNodePath.equals(oakNodePath));
+        assertThat(oakNodePath.hashCode(), is(anotherOakNodePath.hashCode()));
     }
 
     @Test

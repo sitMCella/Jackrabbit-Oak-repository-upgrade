@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -13,6 +14,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class FolderNodeTest {
 
@@ -62,7 +64,8 @@ public class FolderNodeTest {
     public void shouldBeEqualIfAllFieldsAreEqual() throws Exception {
         FolderNode anotherFolderNode = new FolderNode(jcrNodeId, jcrNodePath, NAME, DESCRIPTION, childNodeIds);
 
-        assertTrue(folderNode.equals(anotherFolderNode));
+        assertTrue(folderNode.equals(anotherFolderNode) && anotherFolderNode.equals(folderNode));
+        assertThat(folderNode.hashCode(), is(anotherFolderNode.hashCode()));
     }
 
     @Test
@@ -105,6 +108,23 @@ public class FolderNodeTest {
         FolderNode anotherFolderNode = new FolderNode(jcrNodeId, jcrNodePath, NAME, DESCRIPTION, otherChildNodeIds);
 
         assertFalse(folderNode.equals(anotherFolderNode));
+    }
+
+    @Test
+    public void shouldGetStringRepresentation() throws Exception {
+        String nodeId = "node id";
+        when(jcrNodeId.getNodeId()).thenReturn(nodeId);
+        String path = "/path/to/node";
+        when(jcrNodePath.getPath()).thenReturn(path);
+        childNodeIds.clear();
+        JcrNodeId childNodeId = mock(JcrNodeId.class, "child node id");
+        String childNodeIdentifier = "child node id";
+        when(childNodeId.getNodeId()).thenReturn(childNodeIdentifier);
+        childNodeIds.add(childNodeId);
+        String expected = String.format("FolderNode{jcrNodeId='%s', jcrNodePath='%s', name='%s', description='%s', childNodeIds='%s'}",
+                nodeId, path, NAME, DESCRIPTION, Arrays.toString(childNodeIds.toArray()));
+
+        assertThat(folderNode.toString(), is(expected));
     }
 
 }
