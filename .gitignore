@@ -71,10 +71,11 @@ fabric.properties
 ### Intellij Patch ###
 # Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# *.iml
+*.iml
 # modules.xml
 # .idea/misc.xml
 # *.ipr
+.idea/*
 
 # Sonarlint plugin
 .idea/sonarlint
@@ -90,6 +91,9 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+
+.metadata/*
+.settings/*
 
 
 # End of https://www.gitignore.io/api/maven,intellij
