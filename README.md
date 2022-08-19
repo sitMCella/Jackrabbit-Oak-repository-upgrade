@@ -1,5 +1,23 @@
 # Apache Jackrabbit Oak repository upgrade
 
+> ![File Version](https://github.com/sitMCella/Jackrabbit-Oak-repository-upgrade/wiki/images/file_version_v1.png)
+
+## Table of contents
+
+* [Introduction](#introduction)
+* [Build project](#build-project)
+* [First Application](#first-application)
+  * [Configuration](#first-application-configuration)
+  * [Run the application](#run-the-first-version-application)
+* [Repository upgrade](#repository-upgrade)
+* [Second Application](#second-application)
+  * [Configuration](#second-application-configuration)
+  * [Run the application](#run-the-second-version-application)
+* [Check repository content](#check-repository-content)
+* [Custom node type registration](#custom-node-type-registration)
+
+## Introduction
+
 Apache Jackrabbit Oak is an implementation of JCR 2.0 specification.
 https://jackrabbit.apache.org/oak/
 
@@ -32,29 +50,48 @@ The upgrade procedure updates the node and node history properties definition.
 
 mvn clean install
 
-## Run the first application version
+## First Application
 
+### First Application Configuration
+
+Configure the absolute path where to store the Jackrabbit Oak repository. Use the configuration file located in
+"Jackrabbit-Oak-repository-upgrade/app-run-first-version/src/main/resources/settings.properties"
+
+### Run the first version application
+
+```sh
 cd app-run-first-version/target
-
 java -jar app-run-first-version-1.0-SNAPSHOT.jar
+```
 
-## Run the repository upgrade
+## Repository upgrade
 
+```sh
 cd repository-upgrade-second-version/target
-
 java -jar repository-upgrade-second-version-1.0-SNAPSHOT.jar
+```
 
-## Run the second application version
+## Second Application
 
+### Second Application Configuration
+
+Configure the absolute path where to store the Jackrabbit Oak repository. Use the configuration file located in
+"Jackrabbit-Oak-repository-upgrade/app-run-second-version/src/main/resources/settings.properties"
+
+### Run the second version application
+
+```sh
 cd app-run-second-version/target
-
 java -jar app-run-second-version-1.0-SNAPSHOT.jar
+```
 
-## Check repository content with oak-run jar
+## Check repository content
 
 Download oak-run-1.6.22.jar from https://search.maven.org/artifact/org.apache.jackrabbit/oak-run/1.6.22/jar
 
+```sh
 java -jar oak-run-1.6.22.jar explore /path/to/oak-repository/repository
+```
 
 ## Custom node type registration
 
