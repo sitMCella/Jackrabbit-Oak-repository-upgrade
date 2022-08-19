@@ -1,6 +1,6 @@
 # Apache Jackrabbit Oak repository upgrade
 
-> ![File Version](https://github.com/sitMCella/Jackrabbit-Oak-repository-upgrade/wiki/images/file_version_v1.png)
+![File Version](https://github.com/sitMCella/Jackrabbit-Oak-repository-upgrade/wiki/images/file_version_v1.png)
 
 ## Table of contents
 
