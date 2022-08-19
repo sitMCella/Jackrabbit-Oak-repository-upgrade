@@ -5,6 +5,8 @@ https://jackrabbit.apache.org/oak/
 
 This project provides an example of Jackrabbit Oak repository upgrade.
 
+Read the full [documentation](https://github.com/sitMCella/Jackrabbit-Oak-repository-upgrade/wiki/Home) of the project.
+
 The project consists of two application versions.
 
 The first application repository configuration file is "repository-first-version/src/main.resources/cnd.config".
@@ -50,9 +52,9 @@ java -jar app-run-second-version-1.0-SNAPSHOT.jar
 
 ## Check repository content with oak-run jar
 
-Download oak-run-1.6.10.jar from https://search.maven.org/artifact/org.apache.jackrabbit/oak-run/1.6.10/jar
+Download oak-run-1.6.22.jar from https://search.maven.org/artifact/org.apache.jackrabbit/oak-run/1.6.22/jar
 
-java -jar oak-run-1.6.10.jar explore /path/to/oak-repository/repository
+java -jar oak-run-1.6.22.jar explore /path/to/oak-repository/repository
 
 ## Custom node type registration
 
